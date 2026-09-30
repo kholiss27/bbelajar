@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#050509">
+  <title>KHOLIS // Cyberpunk Portfolio</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap');
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    :root {
+      --cyan: #00f7ff;
+      --pink: #ff007f;
+      --purple: #9d00ff;
+      --green: #00ff9d;
+      --bg: #050509;
+      --panel: rgba(10, 10, 20, 0.72);
+      --text: #f5f5ff;
+      --muted: #85859a;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Rajdhani', sans-serif;
+      overflow-x: hidden;
+    }
+    /* =========================
+       BACKGROUND
+    ========================= */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -2;
+      background:
+        linear-gradient(rgba(0,247,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,247,255,.035) 1px, transparent 1px);
+      background-size: 45px 45px;
+      mask-image: linear-gradient(to bottom, black, transparent 90%);
+    }
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 20;
+      background:
+        repeating-linear-gradient(
+          0deg,
+          rgba(255,255,255,.015) 0px,
+          rgba(255,255,255,.015) 1px,
+          transparent 1px,
+          transparent 4px
+        );
+      opacity: .25;
+    }
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: .12;
+      z-index: -1;
+      pointer-events: none;
+    }
+    .orb.one {
+      width: 400px;
+      height: 400px;
+      background: var(--cyan);
+      top: -150px;
+      left: -100px;
+    }
+    .orb.two {
+      width: 400px;
+      height: 400px;
+      background: var(--pink);
+      right: -120px;
+      top: 35%;
+    }
+    /* =========================
+       NAVBAR
+    ========================= */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 22px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(5,5,9,.7);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(0,247,255,.1);
+    }
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: 4px;
+      color: white;
+      text-shadow:
+        0 0 10px var(--cyan),
+        0 0 30px var(--cyan);
+    }
+    .logo span {
+      color: var(--cyan);
+    }
+    nav ul {
+      display: flex;
+      gap: 35px;
+      list-style: none;
+    }
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 1px;
+      transition: .3s;
+    }
+    nav a:hover {
+      color: var(--cyan);
+      text-shadow: 0 0 12px var(--cyan);
+    }
+    /* =========================
+       HERO
+    ========================= */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 7% 80px;
+      position: relative;
+    }
+    .hero-content {
+      max-width: 850px;
+    }
+    .system {
+      color: var(--green);
+      font-family: monospace;
+      font-size: 13px;
+      margin-bottom: 25px;
+      letter-spacing: 2px;
+    }
+    .system::before {
+      content: "●";
+      margin-right: 10px;
+      text-shadow: 0 0 10px var(--green);
+    }
+    .hero h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(55px, 10vw, 130px);
+      line-height: .9;
+      letter-spacing: -5px;
+      text-transform: uppercase;
+      position: relative;
+    }
+    .hero h1 .name {
+      color: white;
+      text-shadow:
+        3px 3px 0 var(--pink),
+        -3px -3px 0 var(--cyan);
+      animation: glitch 4s infinite;
+    }
+    .hero h1 .cyber {
+      color: transparent;
+      -webkit-text-stroke: 1px var(--cyan);
+      text-shadow: 0 0 25px rgba(0,247,255,.4);
+    }
+    @keyframes glitch {
+      0%, 90%, 100% {
+        transform: translate(0);
+      }
+      92% {
+        transform: translate(4px, -2px);
+      }
+      94% {
+        transform: translate(-4px, 2px);
+      }
+      96% {
+        transform: translate(2px, 1px);
+      }
+    }
+    .hero-description {
+      margin-top: 35px;
+      max-width: 600px;
+      color: var(--muted);
+      font-size: 19px;
+      line-height: 1.7;
+    }
+    .hero-description strong {
+      color: var(--cyan);
+    }
+    .buttons {
+      margin-top: 40px;
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      position: relative;
+      padding: 15px 28px;
+      text-decoration: none;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: .3s;
+      overflow: hidden;
+    }
+    .btn-primary {
+      background: var(--cyan);
+      color: #000;
+      box-shadow:
+        0 0 15px rgba(0,247,255,.5),
+        0 0 40px rgba(0,247,255,.2);
+    }
+    .btn-primary:hover {
+      box-shadow:
+        0 0 25px rgba(0,247,255,.8),
+        0 0 60px rgba(0,247,255,.4);
+      transform: translateY(-3px);
+    }
+    .btn-outline {
+      border: 1px solid var(--pink);
+      color: var(--pink);
+    }
+    .btn-outline:hover {
+      background: var(--pink);
+      color: white;
+      box-shadow: 0 0 25px rgba(255,0,127,.6);
+    }
+    .scroll {
+      position: absolute;
+      bottom: 30px;
+      left: 7%;
+      font-family: monospace;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 3px;
+    }
+    .scroll::after {
+      content: "";
+      display: inline-block;
+      width: 50px;
+      height: 1px;
+      background: var(--cyan);
+      vertical-align: middle;
+      margin-left: 15px;
+      box-shadow: 0 0 8px var(--cyan);
+    }
+    /* =========================
+       SECTIONS
+    ========================= */
+    section {
+      padding: 120px 7%;
+      position: relative;
+    }
+    .section-label {
+      color: var(--cyan);
+      font-family: monospace;
+      letter-spacing: 3px;
+      font-size: 12px;
+      margin-bottom: 15px;
+    }
+    .section-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(30px, 5vw, 60px);
+      margin-bottom: 55px;
+      text-transform: uppercase;
+    }
+    .section-title span {
+      color: var(--pink);
+    }
+    /* =========================
+       ABOUT
+    ========================= */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 70px;
+      align-items: center;
+    }
+    .about-text {
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.8;
+    }
+    .about-text p + p {
+      margin-top: 20px;
+    }
+    .terminal {
+      background: rgba(0,0,0,.5);
+      border: 1px solid rgba(0,247,255,.3);
+      box-shadow: 0 0 30px rgba(0,247,255,.08);
+    }
+    .terminal-head {
+      padding: 12px 18px;
+      border-bottom: 1px solid rgba(0,247,255,.2);
+      font-family: monospace;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .terminal-body {
+      padding: 25px;
+      font-family: monospace;
+      line-height: 2;
+      font-size: 14px;
+    }
+    .terminal-body .key {
+      color: var(--pink);
+    }
+    .terminal-body .value {
+      color: var(--green);
+    }
+    /* =========================
+       SKILLS
+    ========================= */
+    .skills {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+    .skill {
+      padding: 28px;
+      background: var(--panel);
+      border: 1px solid rgba(255,255,255,.08);
+      position: relative;
+      transition: .3s;
+      backdrop-filter: blur(10px);
+    }
+    .skill:hover {
+      border-color: var(--cyan);
+      transform: translateY(-8px);
+      box-shadow: 0 0 25px rgba(0,247,255,.12);
+    }
+    .skill-number {
+      color: var(--pink);
+      font-family: monospace;
+      font-size: 11px;
+    }
+    .skill h3 {
+      margin-top: 25px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 17px;
+    }
+    .skill p {
+      margin-top: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    /* =========================
+       PROJECTS
+    ========================= */
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+    .project {
+      min-height: 320px;
+      padding: 28px;
+      position: relative;
+      background:
+        linear-gradient(145deg, rgba(0,247,255,.05), rgba(255,0,127,.03)),
+        var(--panel);
+      border: 1px solid rgba(255,255,255,.08);
+      overflow: hidden;
+      transition: .4s;
+    }
+    .project::before {
+      content: "";
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      border: 1px solid var(--cyan);
+      border-radius: 50%;
+      right: -80px;
+      bottom: -80px;
+      box-shadow:
+        0 0 20px var(--cyan),
+        inset 0 0 20px var(--cyan);
+      opacity: .25;
+    }
+    .project:hover {
+      transform: translateY(-10px);
+      border-color: var(--cyan);
+      box-shadow: 0 15px 40px rgba(0,247,255,.1);
+    }
+    .project-number {
+      color: var(--cyan);
+      font-family: monospace;
+      font-size: 12px;
+    }
+    .project h3 {
+      margin-top: 55px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 22px;
+    }
+    .project p {
+      margin-top: 15px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .project-tag {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 6px 10px;
+      border: 1px solid rgba(255,0,127,.5);
+      color: var(--pink);
+      font-family: monospace;
+      font-size: 10px;
+    }
+    /* =========================
+       CONTACT
+    ========================= */
+    .contact-box {
+      padding: 70px 40px;
+      text-align: center;
+      border: 1px solid rgba(0,247,255,.25);
+      background:
+        radial-gradient(circle at center, rgba(0,247,255,.07), transparent 60%),
+        var(--panel);
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-box h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(30px, 5vw, 65px);
+      text-transform: uppercase;
+    }
+    .contact-box h2 span {
+      color: var(--cyan);
+      text-shadow: 0 0 20px var(--cyan);
+    }
+    .contact-box p {
+      color: var(--muted);
+      margin: 20px auto 35px;
+      max-width: 550px;
+      font-size: 17px;
+    }
+    /* =========================
+       FOOTER
+    ========================= */
+    footer {
+      padding: 30px 7%;
+      border-top: 1px solid rgba(255,255,255,.07);
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-family: monospace;
+      font-size: 11px;
+    }
+    footer span {
+      color: var(--cyan);
+    }
+    /* =========================
+       RESPONSIVE
+    ========================= */
+    @media (max-width: 900px) {
+      nav ul {
+        display: none;
+      }
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+      .skills {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .projects {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 55px;
+        letter-spacing: -3px;
+      }
+      section {
+        padding: 90px 6%;
+      }
+      .skills {
+        grid-template-columns: 1fr;
+      }
+      .hero-description {
+        font-size: 17px;
+      }
+      footer {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+    /* =========================
+       LOADING EFFECT
+    ========================= */
+    .loading {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: #050509;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: loadingOut 1s 1.5s forwards;
+      pointer-events: none;
+    }
+    .loading-text {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--cyan);
+      letter-spacing: 5px;
+      animation: blink .5s infinite alternate;
+    }
+    @keyframes blink {
+      from { opacity: .3; }
+      to { opacity: 1; }
+    }
+    @keyframes loadingOut {
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="loading">
+    <div class="loading-text">INITIALIZING...</div>
+  </div>
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="logo">KHOLIS<span>//</span></div>
+    <ul>
+      <li><a href="#home">HOME</a></li>
+      <li><a href="#about">ABOUT</a></li>
+      <li><a href="#skills">SKILLS</a></li>
+      <li><a href="#projects">PROJECTS</a></li>
+      <li><a href="#contact">CONTACT</a></li>
+    </ul>
+  </nav>
+  <!-- HERO -->
+  <main id="home">
+    <section class="hero">
+      <div class="hero-content">
+        <div class="system">
+          SYSTEM ONLINE // WELCOME TO MY DIGITAL SPACE
+        </div>
+        <h1>
+          <span class="name">KHOLIS</span><br>
+          <span class="cyber">CYBER</span>
+        </h1>
+        <p class="hero-description">
+          Creative mind in a digital world.
+          I build <strong>modern websites</strong>,
+          create digital experiences, and explore
+          technology with a futuristic perspective.
+        </p>
+        <div class="buttons">
+          <a href="#projects" class="btn btn-primary">
+            VIEW PROJECTS
+          </a>
+          <a href="#contact" class="btn btn-outline">
+            CONTACT ME
+          </a>
+        </div>
+      </div>
+      <div class="scroll">
+        SCROLL TO EXPLORE
+      </div>
+    </section>
+  </main>
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-label">// 01 — IDENTITY</div>
+    <h2 class="section-title">
+      ABOUT <span>ME</span>
+    </h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          Halo, saya <strong style="color:#00f7ff;">Kholis</strong>.
+          Saya tertarik dengan dunia teknologi, desain,
+          website, dan berbagai hal kreatif di dunia digital.
+        </p>
+        <p>
+          Saya suka membuat sesuatu yang bukan hanya
+          berfungsi dengan baik, tetapi juga memiliki
+          tampilan visual yang kuat dan memorable.
+        </p>
+        <p>
+          <span style="color:#ff007f;">
+            THINK. CREATE. EXPLORE.
+          </span>
+        </p>
+      </div>
+      <div class="terminal">
+        <div class="terminal-head">
+          kholis@cyber-system:~$
+        </div>
+        <div class="terminal-body">
+          <div>
+            <span class="key">name</span>:
+            <span class="value">"Kholis"</span>
+          </div>
+          <div>
+            <span class="key">role</span>:
+            <span class="value">"Digital Creator"</span>
+          </div>
+          <div>
+            <span class="key">status</span>:
+            <span class="value">"ONLINE"</span>
+          </div>
+          <div>
+            <span class="key">location</span>:
+            <span class="value">"Indonesia"</span>
+          </div>
+          <div>
+            <span class="key">mode</span>:
+            <span class="value">"CREATE"</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-label">// 02 — SYSTEM ABILITIES</div>
+    <h2 class="section-title">
+      MY <span>SKILLS</span>
+    </h2>
+    <div class="skills">
+      <div class="skill">
+        <div class="skill-number">[01]</div>
+        <h3>WEB DESIGN</h3>
+        <p>
+          Membuat interface modern,
+          clean, futuristic dan responsive.
+        </p>
+      </div>
+      <div class="skill">
+        <div class="skill-number">[02]</div>
+        <h3>HTML / CSS</h3>
+        <p>
+          Membangun struktur dan visual
+          website dengan detail yang kuat.
+        </p>
+      </div>
+      <div class="skill">
+        <div class="skill-number">[03]</div>
+        <h3>UI / UX</h3>
+        <p>
+          Mengembangkan pengalaman pengguna
+          yang simple dan menarik.
+        </p>
+      </div>
+      <div class="skill">
+        <div class="skill-number">[04]</div>
+        <h3>CREATIVE</h3>
+        <p>
+          Eksplorasi ide visual,
+          branding dan digital content.
+        </p>
+      </div>
+    </div>
+  </section>
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-label">// 03 — DIGITAL ARCHIVE</div>
+    <h2 class="section-title">
+      SELECTED <span>PROJECTS</span>
+    </h2>
+    <div class="projects">
+      <div class="project">
+        <div class="project-number">PROJECT_001</div>
+        <h3>CYBER WEBSITE</h3>
+        <p>
+          Website futuristic dengan
+          visual cyberpunk, neon interface
+          dan interactive experience.
+        </p>
+        <span class="project-tag">
+          WEB DESIGN
+        </span>
+      </div>
+      <div class="project">
+        <div class="project-number">PROJECT_002</div>
+        <h3>DIGITAL SPACE</h3>
+        <p>
+          Konsep personal digital space
+          dengan pendekatan minimal,
+          modern dan futuristic.
+        </p>
+        <span class="project-tag">
+          UI / UX
+        </span>
+      </div>
+      <div class="project">
+        <div class="project-number">PROJECT_003</div>
+        <h3>CREATIVE LAB</h3>
+        <p>
+          Eksperimen visual dan teknologi
+          untuk menghasilkan digital
+          experience yang berbeda.
+        </p>
+        <span class="project-tag">
+          CREATIVE
+        </span>
+      </div>
+    </div>
+  </section>
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-box">
+      <div class="section-label">
+        // 04 — COMMUNICATION CHANNEL
+      </div>
+      <h2>
+        LET'S CREATE<br>
+        <span>SOMETHING</span>
+      </h2>
+      <p>
+        Punya project, ide, atau sekadar ingin
+        berkolaborasi? Hubungi saya dan mari
+        membuat sesuatu yang keren.
+      </p>
+      <div class="buttons" style="justify-content:center;">
+        <a
+          href="mailto:your@email.com"
+          class="btn btn-primary">
+          SEND MESSAGE
+        </a>
+        <a
+          href="#home"
+          class="btn btn-outline">
+          BACK TO TOP
+        </a>
+      </div>
+    </div>
+  </section>
+  <!-- FOOTER -->
+  <footer>
+    <div>
+      © 2026 <span>KHOLIS</span>
+    </div>
+    <div>
+      SYSTEM_STATUS: <span>ONLINE</span>
+    </div>
+  </footer>
+</body>
+</html>
